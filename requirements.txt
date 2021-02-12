@@ -1,4 +1,0 @@
-Elasticsearch
-flask
-numpy
-sklearn

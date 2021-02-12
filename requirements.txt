@@ -1,0 +1,5 @@
+Elasticsearch
+flask
+numpy
+tensorflow==1.15
+tensorflow_hub

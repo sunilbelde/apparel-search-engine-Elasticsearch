@@ -1,0 +1,4 @@
+Elasticsearch
+flask
+numpy
+sklearn

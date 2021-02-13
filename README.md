@@ -33,3 +33,8 @@ Results :
 Architecture of the environment:
 
 ![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/Architecture.JPG)
+
+Tools Used:
+
+![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/Tools.JPG)
+

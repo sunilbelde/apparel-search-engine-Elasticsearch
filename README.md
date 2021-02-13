@@ -26,3 +26,5 @@ Run the command to check the containers are up and running
 ###### docker ps
 
 Go to the browser and hit http://localhost:5000 you will see the home page of the application and search for the products
+Results :
+![alt text](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/Results/greytshirts.jpg?raw=true)

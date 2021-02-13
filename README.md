@@ -28,7 +28,7 @@ Run the command to check the containers are up and running
 Go to the browser and hit http://localhost:5000 you will see the home page of the application and search for the products
 Results :
 
-![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/greytshirts.JPG)
+![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/Blueshirts.JPG)
 
 Architecture of the environment:
 

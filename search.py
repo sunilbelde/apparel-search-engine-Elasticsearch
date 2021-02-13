@@ -1,3 +1,4 @@
+#Importing the packages
 from elasticsearch import Elasticsearch 
 import json
 import flask
@@ -11,7 +12,7 @@ search = flask.Flask(__name__)
 search.config["DEBUG"] = True
 
 #ELASTICSEARCH_HOST="localhost"
-ELASTICSEARCH_HOST="172.31.7.122"
+ELASTICSEARCH_HOST="YOUR ELASTICSEARCH HOST IP"
 
 es=Elasticsearch([{'host': ELASTICSEARCH_HOST, 'port': 9200}])
 es.info
@@ -29,11 +30,13 @@ def remove_special_chars(text):
   text=text.lower()
   return text
  
+#Loading the Universal sentence encoder model
 model=Models()
 
 def get_query_doc(query):
   query=remove_special_chars(query)
-  query_vector =model.get_vec_rep(query)
+  query_vector =model.get_vec_rep(query) # Getting the vector representation of text from the model
+  #Creating a document structure to search with query.
   query_doc = {
     "query" : 
     {
@@ -51,6 +54,7 @@ def get_query_doc(query):
   }
   return query_doc
 
+S3_BUCKET='YOUR S3 BUCKET ADDRESS'
 
 @search.route('/',  methods =["GET", "POST"])
 @search.route('/search',  methods =["GET", "POST"])
@@ -62,7 +66,7 @@ def home():
     image_paths=[]
     for hit in res['hits']['hits']:
       image_ids.append(str(hit['_source']['imageid'])+".jpg")
-      image_paths.append("https://flaskappfashion.s3.amazonaws.com/"+str(hit['_source']['imageid'])+".jpg")
+      image_paths.append(S3_BUCKET+str(hit['_source']['imageid'])+".jpg")
     return render_template('search.html', image_name=image_paths,flag=True)
   else:
     return render_template("search.html",flag=False)

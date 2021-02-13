@@ -29,3 +29,7 @@ Go to the browser and hit http://localhost:5000 you will see the home page of th
 Results :
 
 ![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/greytshirts.JPG)
+
+Architecture of the environment:
+
+![plot](https://github.com/sunilbelde/apparel-search-engine-Elasticsearch/blob/main/Results/Architecture.JPG)

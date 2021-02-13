@@ -1,5 +1,6 @@
 Elasticsearch
 flask
 numpy
+pandas
 tensorflow==1.15
 tensorflow_hub

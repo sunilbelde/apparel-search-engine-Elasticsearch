@@ -1,3 +1,5 @@
+#Importing the packages
+
 import pandas as pd
 import re
 import numpy as np
@@ -7,9 +9,9 @@ import json
 
 
 #ELASTICSEARCH_HOST="localhost"
-ELASTICSEARCH_HOST="172.31.7.122"
+ELASTICSEARCH_HOST="YOUR ELASTICSEARCH HOST IP"
 
-es=Elasticsearch([{'host': ELASTICSEARCH_HOST, 'port': 9200}])
+es=Elasticsearch([{'host': ELASTICSEARCH_HOST, 'port': 9200}]) # Connectigng to elasticsearch
 es.info
 
 if es.ping():
@@ -19,7 +21,7 @@ else:
   sys.exit()
   
   
-lst=[6043,6568,7398,7938,9025,10263,10426,10904,11372,11944,14111,14531,15075,29905,31624,33019,35747,35961,37769,38104,38274,38403,]
+lst=[6043,6568,7398,7938,9025,10263,10426,10904,11372,11944,14111,14531,15075,29905,31624,33019,35747,35961,37769,38104,38274,38403,] # This lines were corrupted in the data file.
 data=pd.read_csv('styles.csv',skiprows=lst)
 train=data.drop(['gender','masterCategory','subCategory','articleType','baseColour','season','year','usage'],axis=1)
 
@@ -31,6 +33,8 @@ def remove_special_chars(text):
   return text
 train['productDisplayName']=train['productDisplayName'].apply(lambda text: remove_special_chars(text))
 
+
+#Creating a Mapping template for the documents in the elasticsearch index
 b = {"mappings": {
          "properties": {
                "productDisplayName": {
@@ -46,10 +50,17 @@ b = {"mappings": {
          }
      }
    }
-ret = es.indices.create(index='fashion', ignore=400, body=b) #400 caused by IndexAlreadyExistsException, 
+
+INDEX_NAME='YOUR INDEX NAME'
+
+ret = es.indices.create(index=INDEX_NAME, ignore=400, body=b) #Creating a Index in Elasticsearch
 print(json.dumps(ret,indent=4))
 
+
+#Creating a model which has tensorflow Universal sentence encoder model
 model=Models()
+
+#For each row in data injesting imageid,text and its vector representation with imageid as document id.
 
 for index,row in tqdm(train.iterrows()):
     imageid=row['id']
@@ -61,4 +72,4 @@ for index,row in tqdm(train.iterrows()):
         "imageid":imageid,
         "text_vector":vec
     }
-    res = es.index(index="fashion", id=imageid, body=doc)
+    res = es.index(index=INDEX_NAME, id=imageid, body=doc)

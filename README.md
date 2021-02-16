@@ -16,12 +16,15 @@ Note : keep the docker installed and running before the next steps.
 Steps to set Elasticsearch container
 
  -docker pull docker.elastic.co/elasticsearch/elasticsearch:7.11.0
+ 
  -docker run --name CONTAINER_NAME -d -p 9200:9200 IMAGE_NAME
 
 Steps to run the Flask application.
 
  -Execute the commands where the Dockerfile is present.
+ 
  -docker build -t IMAGE_NAME .
+ 
  -docker run --name CONTAINER_NAME -d -p 5000:5000 IMAGE_NAEME
 
 Run the command to check the containers are up and running
